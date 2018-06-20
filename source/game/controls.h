@@ -102,17 +102,11 @@ class controls
         _window->register_update(controls::on_resize);
 
         // Add FPS(WADS) keys to watch
-        keyboard.add(min::window::key_code::F1);
-        keyboard.add(min::window::key_code::F2);
-        keyboard.add(min::window::key_code::F3);
-        keyboard.add(min::window::key_code::F4);
-        keyboard.add(min::window::key_code::ESCAPE);
         keyboard.add(min::window::key_code::KEYW);
         keyboard.add(min::window::key_code::KEYS);
         keyboard.add(min::window::key_code::KEYA);
         keyboard.add(min::window::key_code::KEYD);
         keyboard.add(min::window::key_code::KEYR);
-        keyboard.add(min::window::key_code::KEYE);
         keyboard.add(min::window::key_code::KEYZ);
         keyboard.add(min::window::key_code::KEYX);
         keyboard.add(min::window::key_code::KEYC);
@@ -125,24 +119,15 @@ class controls
         keyboard.add(min::window::key_code::KEY7);
         keyboard.add(min::window::key_code::KEY8);
         keyboard.add(min::window::key_code::SPACE);
-        keyboard.add(min::window::key_code::TAB);
         keyboard.add(min::window::key_code::LSHIFT);
+        keyboard.add(min::window::key_code::TAB);
+        keyboard.add(min::window::key_code::F1);
+        keyboard.add(min::window::key_code::F2);
+        keyboard.add(min::window::key_code::F3);
+        keyboard.add(min::window::key_code::F4);
+        keyboard.add(min::window::key_code::ESCAPE);
+        keyboard.add(min::window::key_code::KEYE);
         keyboard.add(min::window::key_code::KEYQ);
-
-        // Register callback function F1
-        keyboard.register_keydown(min::window::key_code::F1, controls::toggle_text, (void *)this);
-
-        // Register callback function F2
-        keyboard.register_keydown(min::window::key_code::F2, controls::toggle_wireframe, (void *)this);
-
-        // Register callback function F3
-        keyboard.register_keydown(min::window::key_code::F3, controls::music_down, (void *)_sound);
-
-        // Register callback function F4
-        keyboard.register_keydown(min::window::key_code::F4, controls::music_up, (void *)_sound);
-
-        // Register callback function ESCAPE
-        keyboard.register_keydown(min::window::key_code::ESCAPE, controls::toggle_pause, (void *)this);
 
         // Register callback function W
         keyboard.register_keydown_per_frame(min::window::key_code::KEYW, controls::forward, (void *)this);
@@ -155,9 +140,6 @@ class controls
 
         // Register callback function D
         keyboard.register_keydown_per_frame(min::window::key_code::KEYD, controls::right, (void *)this);
-
-        // Register callback function E
-        keyboard.register_keydown(min::window::key_code::KEYE, controls::select, (void *)this);
 
         // Register callback function R
         keyboard.register_keydown(min::window::key_code::KEYR, controls::reset, (void *)this);
@@ -206,12 +188,30 @@ class controls
         // Register callback function SPACE
         keyboard.register_keydown(min::window::key_code::SPACE, controls::jump, (void *)this);
 
-        // Register callback function TAB
-        keyboard.register_keydown(min::window::key_code::TAB, controls::ui_extend, (void *)this);
-
         // Register callback function LSHIFT
         keyboard.register_keydown(min::window::key_code::LSHIFT, controls::shift_down, (void *)this);
         keyboard.register_keyup(min::window::key_code::LSHIFT, controls::shift_up, (void *)this);
+
+        // Register callback function TAB
+        keyboard.register_keydown(min::window::key_code::TAB, controls::ui_extend, (void *)this);
+
+        // Register callback function F1
+        keyboard.register_keydown(min::window::key_code::F1, controls::toggle_text, (void *)this);
+
+        // Register callback function F2
+        keyboard.register_keydown(min::window::key_code::F2, controls::toggle_wireframe, (void *)this);
+
+        // Register callback function F3
+        keyboard.register_keydown(min::window::key_code::F3, controls::music_down, (void *)_sound);
+
+        // Register callback function F4
+        keyboard.register_keydown(min::window::key_code::F4, controls::music_up, (void *)_sound);
+
+        // Register callback function ESCAPE
+        keyboard.register_keydown(min::window::key_code::ESCAPE, controls::toggle_pause, (void *)this);
+
+        // Register callback function E
+        keyboard.register_keydown(min::window::key_code::KEYE, controls::select, (void *)this);
 
         // Register callback function KEYQ
         keyboard.register_keydown(min::window::key_code::KEYQ, controls::drop_item, (void *)this);

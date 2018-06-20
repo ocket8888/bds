@@ -113,13 +113,17 @@ class ui_menu
     {
         return _extended;
     }
+    inline void make_dirty()
+    {
+        _dirty = true;
+    }
     inline min::vec2<float> position_text(const uint_fast16_t center_w, const size_t index) const
     {
         if (_extended)
         {
             // Get row and col
-            const unsigned row = index / 4;
-            const unsigned col = index & 3;
+            const unsigned row = index & 7;
+            const unsigned col = index / 8;
             return ui_bg_assets::menu_ext_text_position(center_w, row, col);
         }
         else

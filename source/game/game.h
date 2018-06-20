@@ -64,7 +64,7 @@ class bds
     game::controls _controls;
     game::title _title;
     game::key_map _keymap;
-    min::window::key_type _last_key;
+    size_t _last_key_index;
     std::pair<uint_fast16_t, uint_fast16_t> _cursor;
     double _fps;
     double _idle;
@@ -139,38 +139,65 @@ class bds
             game::ui_menu &menu = this->_ui.get_menu();
 
             // Iterate through the keys
-            size_t i = 0;
-            for (const auto &k : keys)
+            const size_t max_size = menu.max_size();
+            const size_t size = std::min(max_size, keys.size());
+            for (size_t i = 0; i < size; i++)
             {
                 // Set the button string
-                menu.set_string(i, &this->_keymap.get_string(k));
+                menu.set_string(i, &this->_keymap.get_string(keys[i]));
 
                 // Create callback and set it
-                const auto f = [this, k]() -> void {
-                    this->_last_key = k;
+                const auto f = [this, i]() -> void {
+                    this->_last_key_index = i;
                     this->_win.get_keyboard().register_override_keyup(bds::menu_override, (void *)this);
                 };
-                menu.set_callback(i++, f);
+                menu.set_callback(i, f);
+            }
+
+            // Clear out the rest of the buttons
+            for (size_t i = size; i < max_size - 1; i++)
+            {
+                // Set the button string
+                menu.set_string_empty(i);
+                menu.set_callback(i, nullptr);
             }
 
             // Set the menu back button
             menu.set_string_back(31);
             menu.set_callback(31, this->menu_reset_call());
+
+            // Register menu updates
+            menu.make_dirty();
         };
     }
-    static void menu_override(void *const ptr, const min::window::key_type key)
+    static void menu_override(void *const ptr, const min::window::key_type to_key)
     {
         // Get the game object
         bds *const game = reinterpret_cast<bds *const>(ptr);
 
+        // Get access to the keyboard
+        auto &keyboard = game->_win.get_keyboard();
+
         // Debounce this override
-        game->_win.get_keyboard().register_override_keyup(nullptr, nullptr);
+        keyboard.register_override_keyup(nullptr, nullptr);
+
+        // Get the active keys
+        const std::vector<min::window::key_type> &keys = keyboard.get_active_keys();
+
+        // Get the last key index
+        const size_t index = game->_last_key_index;
 
         // Remap the keyboard key
-        if (game->_win.get_keyboard().swap(game->_last_key, key))
+        if (keyboard.swap(keys[index], to_key))
         {
-            // Update the changes in the menu
-            game->menu_control_call()();
+            // Get the menu from ui
+            game::ui_menu &menu = game->_ui.get_menu();
+
+            // Update the key string
+            menu.set_string(index, &game->_keymap.get_string(to_key));
+
+            // Register menu updates
+            menu.make_dirty();
         }
     }
     game::menu_call menu_quit_call()
@@ -412,7 +439,7 @@ class bds
           _state(opt, _world.get_load_state()),
           _ui(_uniforms, _world.get_player().get_inventory(), _world.get_player().get_stats(), _win.get_width(), _win.get_height()),
           _controls(_win, _state.get_camera(), _character, _state, _ui, _world, _sound),
-          _title(_state.get_camera(), _ui, _win), _fps(0.0), _idle(0.0)
+          _title(_state.get_camera(), _ui, _win), _last_key_index(0), _fps(0.0), _idle(0.0)
     {
         // Set depth and cull settings
         min::settings::initialize();
