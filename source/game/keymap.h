@@ -28,7 +28,7 @@ namespace game
 class key_map
 {
   private:
-    static constexpr size_t _max_strings = 70;
+    static constexpr size_t _max_strings = 75;
     std::vector<std::string> _map;
 
     void load_strings()
@@ -45,42 +45,42 @@ class key_map
         _map[9] = "F10";
         _map[10] = "F11";
         _map[11] = "F12";
-        _map[12] = "KEY 0";
-        _map[13] = "KEY 1";
-        _map[14] = "KEY 2";
-        _map[15] = "KEY 3";
-        _map[16] = "KEY 4";
-        _map[17] = "KEY 5";
-        _map[18] = "KEY 6";
-        _map[19] = "KEY 7";
-        _map[20] = "KEY 8";
-        _map[21] = "KEY 9";
-        _map[22] = "KEY A";
-        _map[23] = "KEY B";
-        _map[24] = "KEY C";
-        _map[25] = "KEY D";
-        _map[26] = "KEY E";
-        _map[27] = "KEY F";
-        _map[28] = "KEY G";
-        _map[29] = "KEY H";
-        _map[30] = "KEY I";
-        _map[31] = "KEY J";
-        _map[32] = "KEY K";
-        _map[33] = "KEY L";
-        _map[34] = "KEY M";
-        _map[35] = "KEY N";
-        _map[36] = "KEY O";
-        _map[37] = "KEY P";
-        _map[38] = "KEY Q";
-        _map[39] = "KEY R";
-        _map[40] = "KEY S";
-        _map[41] = "KEY T";
-        _map[42] = "KEY U";
-        _map[43] = "KEY V";
-        _map[44] = "KEY W";
-        _map[45] = "KEY X";
-        _map[46] = "KEY Y";
-        _map[47] = "KEY Z";
+        _map[12] = "0";
+        _map[13] = "1";
+        _map[14] = "2";
+        _map[15] = "3";
+        _map[16] = "4";
+        _map[17] = "5";
+        _map[18] = "6";
+        _map[19] = "7";
+        _map[20] = "8";
+        _map[21] = "9";
+        _map[22] = "A";
+        _map[23] = "B";
+        _map[24] = "C";
+        _map[25] = "D";
+        _map[26] = "E";
+        _map[27] = "F";
+        _map[28] = "G";
+        _map[29] = "H";
+        _map[30] = "I";
+        _map[31] = "J";
+        _map[32] = "K";
+        _map[33] = "L";
+        _map[34] = "M";
+        _map[35] = "N";
+        _map[36] = "O";
+        _map[37] = "P";
+        _map[38] = "Q";
+        _map[39] = "R";
+        _map[40] = "S";
+        _map[41] = "T";
+        _map[42] = "U";
+        _map[43] = "V";
+        _map[44] = "W";
+        _map[45] = "X";
+        _map[46] = "Y";
+        _map[47] = "Z";
         _map[48] = "NUM 0";
         _map[49] = "NUM 1";
         _map[50] = "NUM 2";
@@ -102,7 +102,12 @@ class key_map
         _map[66] = "LALT";
         _map[67] = "RALT";
         _map[68] = "ESCAPE";
-        _map[69] = "Invalid Key";
+        _map[69] = "APOST";
+        _map[70] = "QUOTE";
+        _map[71] = ",";
+        _map[72] = ".";
+        _map[73] = ";";
+        _map[74] = "Unknown Key";
     }
 
   public:
@@ -253,8 +258,18 @@ class key_map
             return _map[67];
         case min::window::key_code::ESCAPE:
             return _map[68];
-        default:
+        case min::window::key_code::APOSTROPHE:
             return _map[69];
+        case min::window::key_code::QUOTE:
+            return _map[70];
+        case min::window::key_code::COMMA:
+            return _map[71];
+        case min::window::key_code::PERIOD:
+            return _map[72];
+        case min::window::key_code::SEMICOLON:
+            return _map[73];
+        default:
+            return _map[74];
         }
     }
 };

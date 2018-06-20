@@ -133,7 +133,7 @@ class bds
             auto &keyboard = this->_win.get_keyboard();
 
             // Get the active keys
-            const auto &keys = keyboard.get_active_keys();
+            const std::vector<min::window::key_type> &keys = keyboard.get_active_keys();
 
             // Get the menu from ui
             game::ui_menu &menu = this->_ui.get_menu();
@@ -142,15 +142,12 @@ class bds
             size_t i = 0;
             for (const auto &k : keys)
             {
-                // Get the key code
-                const min::window::key_type key = k.first;
-
                 // Set the button string
-                menu.set_string(i, &this->_keymap.get_string(key));
+                menu.set_string(i, &this->_keymap.get_string(k));
 
                 // Create callback and set it
-                const auto f = [this, key]() -> void {
-                    this->_last_key = key;
+                const auto f = [this, k]() -> void {
+                    this->_last_key = k;
                     this->_win.get_keyboard().register_override_keyup(bds::menu_override, (void *)this);
                 };
                 menu.set_callback(i++, f);
