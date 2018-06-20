@@ -28,248 +28,286 @@ namespace game
 class key_map
 {
   private:
-    static constexpr size_t _max_strings = 75;
-    std::vector<std::string> _map;
+    static constexpr size_t _max_prefix = 26;
+    static constexpr size_t _max_keys = 75;
+    std::vector<std::string> _prefix;
+    std::vector<std::string> _key;
 
-    void load_strings()
+    void load_prefix_strings()
     {
-        _map[0] = "F1";
-        _map[1] = "F2";
-        _map[2] = "F3";
-        _map[3] = "F4";
-        _map[4] = "F5";
-        _map[5] = "F6";
-        _map[6] = "F7";
-        _map[7] = "F8";
-        _map[8] = "F9";
-        _map[9] = "F10";
-        _map[10] = "F11";
-        _map[11] = "F12";
-        _map[12] = "0";
-        _map[13] = "1";
-        _map[14] = "2";
-        _map[15] = "3";
-        _map[16] = "4";
-        _map[17] = "5";
-        _map[18] = "6";
-        _map[19] = "7";
-        _map[20] = "8";
-        _map[21] = "9";
-        _map[22] = "A";
-        _map[23] = "B";
-        _map[24] = "C";
-        _map[25] = "D";
-        _map[26] = "E";
-        _map[27] = "F";
-        _map[28] = "G";
-        _map[29] = "H";
-        _map[30] = "I";
-        _map[31] = "J";
-        _map[32] = "K";
-        _map[33] = "L";
-        _map[34] = "M";
-        _map[35] = "N";
-        _map[36] = "O";
-        _map[37] = "P";
-        _map[38] = "Q";
-        _map[39] = "R";
-        _map[40] = "S";
-        _map[41] = "T";
-        _map[42] = "U";
-        _map[43] = "V";
-        _map[44] = "W";
-        _map[45] = "X";
-        _map[46] = "Y";
-        _map[47] = "Z";
-        _map[48] = "NUM 0";
-        _map[49] = "NUM 1";
-        _map[50] = "NUM 2";
-        _map[51] = "NUM 3";
-        _map[52] = "NUM 4";
-        _map[53] = "NUM 5";
-        _map[54] = "NUM 6";
-        _map[55] = "NUM 7";
-        _map[56] = "NUM 8";
-        _map[57] = "NUM 9";
-        _map[58] = "LSHIFT";
-        _map[59] = "RSHIFT";
-        _map[60] = "LCONTROL";
-        _map[61] = "RCONTROL";
-        _map[62] = "TAB";
-        _map[63] = "ENTER";
-        _map[64] = "BACKSPACE";
-        _map[65] = "SPACE";
-        _map[66] = "LALT";
-        _map[67] = "RALT";
-        _map[68] = "ESCAPE";
-        _map[69] = "APOST";
-        _map[70] = "QUOTE";
-        _map[71] = ",";
-        _map[72] = ".";
-        _map[73] = ";";
-        _map[74] = "Unknown Key";
+        _prefix[0] = "For: ";
+        _prefix[1] = "Back: ";
+        _prefix[2] = "Left: ";
+        _prefix[3] = "Right: ";
+        _prefix[4] = "Reset: ";
+        _prefix[5] = "ScaleX: ";
+        _prefix[6] = "ScaleY: ";
+        _prefix[7] = "ScaleZ: ";
+        _prefix[8] = "Item1: ";
+        _prefix[9] = "Item2: ";
+        _prefix[10] = "Item3: ";
+        _prefix[11] = "Item4: ";
+        _prefix[12] = "Item5: ";
+        _prefix[13] = "Item6: ";
+        _prefix[14] = "Item7: ";
+        _prefix[15] = "Item8: ";
+        _prefix[16] = "Jump: ";
+        _prefix[17] = "Dash: ";
+        _prefix[18] = "Inv: ";
+        _prefix[19] = "Debug: ";
+        _prefix[20] = "Wire: ";
+        _prefix[21] = "MusicUp: ";
+        _prefix[22] = "MusicDown: ";
+        _prefix[23] = "Menu: ";
+        _prefix[24] = "Use: ";
+        _prefix[25] = "Drop: ";
+    }
+    void load_key_strings()
+    {
+        _key[0] = "F1";
+        _key[1] = "F2";
+        _key[2] = "F3";
+        _key[3] = "F4";
+        _key[4] = "F5";
+        _key[5] = "F6";
+        _key[6] = "F7";
+        _key[7] = "F8";
+        _key[8] = "F9";
+        _key[9] = "F10";
+        _key[10] = "F11";
+        _key[11] = "F12";
+        _key[12] = "0";
+        _key[13] = "1";
+        _key[14] = "2";
+        _key[15] = "3";
+        _key[16] = "4";
+        _key[17] = "5";
+        _key[18] = "6";
+        _key[19] = "7";
+        _key[20] = "8";
+        _key[21] = "9";
+        _key[22] = "A";
+        _key[23] = "B";
+        _key[24] = "C";
+        _key[25] = "D";
+        _key[26] = "E";
+        _key[27] = "F";
+        _key[28] = "G";
+        _key[29] = "H";
+        _key[30] = "I";
+        _key[31] = "J";
+        _key[32] = "K";
+        _key[33] = "L";
+        _key[34] = "M";
+        _key[35] = "N";
+        _key[36] = "O";
+        _key[37] = "P";
+        _key[38] = "Q";
+        _key[39] = "R";
+        _key[40] = "S";
+        _key[41] = "T";
+        _key[42] = "U";
+        _key[43] = "V";
+        _key[44] = "W";
+        _key[45] = "X";
+        _key[46] = "Y";
+        _key[47] = "Z";
+        _key[48] = "NUM 0";
+        _key[49] = "NUM 1";
+        _key[50] = "NUM 2";
+        _key[51] = "NUM 3";
+        _key[52] = "NUM 4";
+        _key[53] = "NUM 5";
+        _key[54] = "NUM 6";
+        _key[55] = "NUM 7";
+        _key[56] = "NUM 8";
+        _key[57] = "NUM 9";
+        _key[58] = "LSHIFT";
+        _key[59] = "RSHIFT";
+        _key[60] = "LCONTROL";
+        _key[61] = "RCONTROL";
+        _key[62] = "TAB";
+        _key[63] = "ENTER";
+        _key[64] = "BACKSPACE";
+        _key[65] = "SPACE";
+        _key[66] = "LALT";
+        _key[67] = "RALT";
+        _key[68] = "ESC";
+        _key[69] = "APOST";
+        _key[70] = "QUOTE";
+        _key[71] = ",";
+        _key[72] = ".";
+        _key[73] = ";";
+        _key[74] = "???";
     }
 
   public:
-    key_map() : _map(_max_strings)
+    key_map(const size_t prefix_size) : _prefix(std::max(prefix_size, _max_prefix), "?"), _key(_max_keys)
     {
         // Load the key strings
-        load_strings();
+        load_prefix_strings();
+
+        // Load the key strings
+        load_key_strings();
     }
-    const std::string &get_string(const min::window::key_type key) const
+    const std::string &get_prefix_string(const size_t index) const
+    {
+        return _prefix[index];
+    }
+    const std::string &get_key_string(const min::window::key_type key) const
     {
         switch (key)
         {
         case min::window::key_code::F1:
-            return _map[0];
+            return _key[0];
         case min::window::key_code::F2:
-            return _map[1];
+            return _key[1];
         case min::window::key_code::F3:
-            return _map[2];
+            return _key[2];
         case min::window::key_code::F4:
-            return _map[3];
+            return _key[3];
         case min::window::key_code::F5:
-            return _map[4];
+            return _key[4];
         case min::window::key_code::F6:
-            return _map[5];
+            return _key[5];
         case min::window::key_code::F7:
-            return _map[6];
+            return _key[6];
         case min::window::key_code::F8:
-            return _map[7];
+            return _key[7];
         case min::window::key_code::F9:
-            return _map[8];
+            return _key[8];
         case min::window::key_code::F10:
-            return _map[9];
+            return _key[9];
         case min::window::key_code::F11:
-            return _map[10];
+            return _key[10];
         case min::window::key_code::F12:
-            return _map[11];
+            return _key[11];
         case min::window::key_code::KEY0:
-            return _map[12];
+            return _key[12];
         case min::window::key_code::KEY1:
-            return _map[13];
+            return _key[13];
         case min::window::key_code::KEY2:
-            return _map[14];
+            return _key[14];
         case min::window::key_code::KEY3:
-            return _map[15];
+            return _key[15];
         case min::window::key_code::KEY4:
-            return _map[16];
+            return _key[16];
         case min::window::key_code::KEY5:
-            return _map[17];
+            return _key[17];
         case min::window::key_code::KEY6:
-            return _map[18];
+            return _key[18];
         case min::window::key_code::KEY7:
-            return _map[19];
+            return _key[19];
         case min::window::key_code::KEY8:
-            return _map[20];
+            return _key[20];
         case min::window::key_code::KEY9:
-            return _map[21];
+            return _key[21];
         case min::window::key_code::KEYA:
-            return _map[22];
+            return _key[22];
         case min::window::key_code::KEYB:
-            return _map[23];
+            return _key[23];
         case min::window::key_code::KEYC:
-            return _map[24];
+            return _key[24];
         case min::window::key_code::KEYD:
-            return _map[25];
+            return _key[25];
         case min::window::key_code::KEYE:
-            return _map[26];
+            return _key[26];
         case min::window::key_code::KEYF:
-            return _map[27];
+            return _key[27];
         case min::window::key_code::KEYG:
-            return _map[28];
+            return _key[28];
         case min::window::key_code::KEYH:
-            return _map[29];
+            return _key[29];
         case min::window::key_code::KEYI:
-            return _map[30];
+            return _key[30];
         case min::window::key_code::KEYJ:
-            return _map[31];
+            return _key[31];
         case min::window::key_code::KEYK:
-            return _map[32];
+            return _key[32];
         case min::window::key_code::KEYL:
-            return _map[33];
+            return _key[33];
         case min::window::key_code::KEYM:
-            return _map[34];
+            return _key[34];
         case min::window::key_code::KEYN:
-            return _map[35];
+            return _key[35];
         case min::window::key_code::KEYO:
-            return _map[36];
+            return _key[36];
         case min::window::key_code::KEYP:
-            return _map[37];
+            return _key[37];
         case min::window::key_code::KEYQ:
-            return _map[38];
+            return _key[38];
         case min::window::key_code::KEYR:
-            return _map[39];
+            return _key[39];
         case min::window::key_code::KEYS:
-            return _map[40];
+            return _key[40];
         case min::window::key_code::KEYT:
-            return _map[41];
+            return _key[41];
         case min::window::key_code::KEYU:
-            return _map[42];
+            return _key[42];
         case min::window::key_code::KEYV:
-            return _map[43];
+            return _key[43];
         case min::window::key_code::KEYW:
-            return _map[44];
+            return _key[44];
         case min::window::key_code::KEYX:
-            return _map[45];
+            return _key[45];
         case min::window::key_code::KEYY:
-            return _map[46];
+            return _key[46];
         case min::window::key_code::KEYZ:
-            return _map[47];
+            return _key[47];
         case min::window::key_code::NUM0:
-            return _map[48];
+            return _key[48];
         case min::window::key_code::NUM1:
-            return _map[49];
+            return _key[49];
         case min::window::key_code::NUM2:
-            return _map[50];
+            return _key[50];
         case min::window::key_code::NUM3:
-            return _map[51];
+            return _key[51];
         case min::window::key_code::NUM4:
-            return _map[52];
+            return _key[52];
         case min::window::key_code::NUM5:
-            return _map[53];
+            return _key[53];
         case min::window::key_code::NUM6:
-            return _map[54];
+            return _key[54];
         case min::window::key_code::NUM7:
-            return _map[55];
+            return _key[55];
         case min::window::key_code::NUM8:
-            return _map[56];
+            return _key[56];
         case min::window::key_code::NUM9:
-            return _map[57];
+            return _key[57];
         case min::window::key_code::LSHIFT:
-            return _map[58];
+            return _key[58];
         case min::window::key_code::RSHIFT:
-            return _map[59];
+            return _key[59];
         case min::window::key_code::LCONTROL:
-            return _map[60];
+            return _key[60];
         case min::window::key_code::RCONTROL:
-            return _map[61];
+            return _key[61];
         case min::window::key_code::TAB:
-            return _map[62];
+            return _key[62];
         case min::window::key_code::ENTER:
-            return _map[63];
+            return _key[63];
         case min::window::key_code::BACKSPACE:
-            return _map[64];
+            return _key[64];
         case min::window::key_code::SPACE:
-            return _map[65];
+            return _key[65];
         case min::window::key_code::LALT:
-            return _map[66];
+            return _key[66];
         case min::window::key_code::RALT:
-            return _map[67];
+            return _key[67];
         case min::window::key_code::ESCAPE:
-            return _map[68];
+            return _key[68];
         case min::window::key_code::APOSTROPHE:
-            return _map[69];
+            return _key[69];
         case min::window::key_code::QUOTE:
-            return _map[70];
+            return _key[70];
         case min::window::key_code::COMMA:
-            return _map[71];
+            return _key[71];
         case min::window::key_code::PERIOD:
-            return _map[72];
+            return _key[72];
         case min::window::key_code::SEMICOLON:
-            return _map[73];
+            return _key[73];
         default:
-            return _map[74];
+            return _key[74];
         }
     }
 };
