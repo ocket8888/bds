@@ -112,7 +112,11 @@ class ui_control_menu
     inline void unselect_click(const ui_state &state)
     {
         const ui_id click = state.get_click();
-        if (state.get_mode() == ui_mode::MENU)
+        if (state.is_hover_click())
+        {
+            select_hover(state);
+        }
+        else if (state.get_mode() == ui_mode::MENU)
         {
             _assets->load_bg_menu_black(click.bg_menu_base_index(), _bg_scale, pos_base_menu(click));
         }

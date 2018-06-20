@@ -170,10 +170,11 @@ class bds
         game->_win.get_keyboard().register_override_keyup(nullptr, nullptr);
 
         // Remap the keyboard key
-        game->_win.get_keyboard().swap(game->_last_key, key);
-
-        // Update the changes in the menu
-        game->menu_control_call()();
+        if (game->_win.get_keyboard().swap(game->_last_key, key))
+        {
+            // Update the changes in the menu
+            game->menu_control_call()();
+        }
     }
     game::menu_call menu_quit_call()
     {
